@@ -147,7 +147,7 @@ public class WindowListAction implements IWorkbenchWindowPulldownDelegate2 {
 		public void widgetArmed(ArmEvent e) {
 			Object element = ((MenuItem) e.getSource()).getData();
 			if (null != element) {
-				int hwnd = TargetWindow.getRootWindow(element);
+				long hwnd = TargetWindow.getRootWindow(element);
 				HighlightComposite.flashRectangle(WindowUtil
 						.GetWindowRectangle(hwnd));
 			}
@@ -158,7 +158,7 @@ public class WindowListAction implements IWorkbenchWindowPulldownDelegate2 {
 		public void widgetSelected(SelectionEvent event) {
 			TargetWindow.setCurrentElement(((MenuItem) event.getSource())
 					.getData());
-			int hwnd = TargetWindow.getWindowHandle();
+			long hwnd = TargetWindow.getWindowHandle();
 			boolean isEmbedded = TargetWindow.isEmbeddedBrowser();
 			try {
 				if (setWindowOrder(GuiPreferenceManager

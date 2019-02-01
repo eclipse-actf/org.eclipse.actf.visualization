@@ -24,7 +24,7 @@ public class InternalAccessibleAction implements AccessibleAction {
 
     private IAccessibleAction accessibleAction = null;
     
-    public InternalAccessibleAction(int address) {
+    public InternalAccessibleAction(long address) {
         accessibleAction = new IAccessibleAction(address);
         accessibleAction.AddRef();
     }

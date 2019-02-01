@@ -19,4 +19,5 @@ Export-Package: org.eclipse.actf.visualization.engines.blind.html,
  org.eclipse.actf.visualization.engines.blind.html.ui.actions,
  org.eclipse.actf.visualization.engines.blind.html.ui.elementViewer,
  org.eclipse.actf.visualization.engines.blind.html.util
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: org.eclipse.actf.visualization.engines.blind.html

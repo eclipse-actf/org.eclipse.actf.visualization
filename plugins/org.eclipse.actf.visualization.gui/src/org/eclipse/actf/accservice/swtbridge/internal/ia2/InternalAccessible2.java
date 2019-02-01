@@ -19,6 +19,7 @@ import org.eclipse.actf.util.win32.MemoryUtil;
 import org.eclipse.actf.util.win32.NativeIntAccess;
 import org.eclipse.actf.util.win32.NativeStringAccess;
 import org.eclipse.swt.internal.ole.win32.COM;
+import org.eclipse.swt.internal.win32.OS;
 import org.eclipse.swt.ole.win32.OLE;
 
 
@@ -309,11 +310,11 @@ public class InternalAccessible2 implements Accessible2 {
         return null;
     }
     
-    public static String[] getStringArray(int pBSTR, int count, boolean bFree) {
+    public static String[] getStringArray(long pBSTR, int count, boolean bFree) {
         String[] sRet = new String[count];
         if( count > 0 ) {
-            int[] hMem = new int[count];
-            MemoryUtil.MoveMemory(hMem, pBSTR, 4*count);
+            long[] hMem = new long[count];
+            OS.MoveMemory(hMem, pBSTR, OS.PTR_SIZEOF * count);
             for( int i=0; i<count; i++) {
                 sRet[i] = ""; //$NON-NLS-1$
                 if (0 != hMem[i]) {

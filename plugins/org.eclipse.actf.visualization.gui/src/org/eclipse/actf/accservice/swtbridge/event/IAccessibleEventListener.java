@@ -14,6 +14,6 @@ import org.eclipse.actf.accservice.swtbridge.AccessibleObject;
 
 public interface IAccessibleEventListener {
 
-	public void handleEvent(int event, int hwnd, int idObject, int idChild, AccessibleObject accObject);
+	public void handleEvent(int event, long hwnd, int idObject, int idChild, AccessibleObject accObject);
 	
 }

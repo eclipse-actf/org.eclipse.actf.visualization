@@ -12,6 +12,7 @@
 package org.eclipse.actf.accservice.swtbridge.internal.ia2;
 
 import org.eclipse.actf.util.win32.COMUtil;
+import org.eclipse.swt.internal.ole.win32.COM;
 import org.eclipse.swt.internal.ole.win32.GUID;
 import org.eclipse.swt.internal.ole.win32.IUnknown;
 
@@ -20,19 +21,19 @@ import org.eclipse.swt.internal.ole.win32.IUnknown;
 public class IAccessibleImage extends IUnknown {
     public static final GUID IID = COMUtil.IIDFromString("{FE5ABB3D-615E-4f7b-909F-5F0EDA9E8DDE}"); //$NON-NLS-1$
     
-    int address;
-    public IAccessibleImage(int address) {
+    long address;
+    public IAccessibleImage(long address) {
         super(address);
         this.address = address;
     }
 
-    public int get_description(int pszDescription) {
-        return COMUtil.VtblCall(3, address, pszDescription);
+    public int get_description(long pszDescription) {
+        return COM.VtblCall(3, address, pszDescription);
     }
-    public int get_imagePosition(int coordinateType, int pX, int pY) {
-        return COMUtil.VtblCall(4, address, coordinateType, pX, pY);
+    public int get_imagePosition(int coordinateType, long pX, long pY) {
+        return COM.VtblCall(4, address, coordinateType, pX, pY);
     }
-    public int get_imageSize(int pWidth, int pHeight) {
-        return COMUtil.VtblCall(5, address, pWidth, pHeight);
+    public int get_imageSize(long pWidth, long pHeight) {
+        return COM.VtblCall(5, address, pWidth, pHeight);
     }
 }

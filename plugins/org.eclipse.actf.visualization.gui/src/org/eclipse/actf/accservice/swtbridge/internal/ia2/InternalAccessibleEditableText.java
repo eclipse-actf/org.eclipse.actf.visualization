@@ -22,7 +22,7 @@ public class InternalAccessibleEditableText implements AccessibleEditableText {
 
     private IAccessibleEditableText accessibleEditableText = null;
     
-    public InternalAccessibleEditableText(int address) {
+    public InternalAccessibleEditableText(long address) {
         accessibleEditableText = new IAccessibleEditableText(address);
         accessibleEditableText.AddRef();
     }

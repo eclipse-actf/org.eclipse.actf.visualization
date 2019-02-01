@@ -41,14 +41,14 @@ public class AccessibleObjectFactory {
 		return null;
 	}
 
-	public static AccessibleObject getAccessibleObjectFromWindow(int hwnd) {
+	public static AccessibleObject getAccessibleObjectFromWindow(long hwnd) {
 		if (null != currentFactory) {
 			return currentFactory.getAccessibleObjectFromWindow(hwnd);
 		}
 		return null;
 	}
 
-	public static AccessibleObject getAccessibleObjectFromEvent(int hwnd,
+	public static AccessibleObject getAccessibleObjectFromEvent(long hwnd,
 			int dwId, int dwChildId) {
 		if (null != currentFactory) {
 			return currentFactory.getAccessibleObjectFromEvent(hwnd, dwId,

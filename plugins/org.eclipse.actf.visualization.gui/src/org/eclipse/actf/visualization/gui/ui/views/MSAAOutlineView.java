@@ -16,7 +16,6 @@ import org.eclipse.actf.accservice.swtbridge.AccessibleObject;
 import org.eclipse.actf.accservice.swtbridge.IA2;
 import org.eclipse.actf.accservice.swtbridge.MSAA;
 import org.eclipse.actf.accservice.swtbridge.ia2.Accessible2;
-import org.eclipse.actf.model.flash.util.FlashMSAAUtil;
 import org.eclipse.actf.util.win32.HighlightComposite;
 import org.eclipse.actf.util.win32.OverlayLabel;
 import org.eclipse.actf.visualization.gui.IGuiViewIDs;
@@ -580,18 +579,18 @@ public class MSAAOutlineView extends ViewPart implements IMSAAOutlineView {
 	}
 
 	private Color getFlashBackground(AccessibleObject accObject) {
-		switch (accObject.getAccRole()) {
-		case MSAA.ROLE_SYSTEM_WINDOW:
-			if (FlashMSAAUtil.isFlash(accObject.getPtr())) {
-				return FLASH_COLOR;
-			}
-			break;
-		case MSAA.ROLE_SYSTEM_CLIENT:
-			if (FlashMSAAUtil.isInvisibleFlash(accObject.getPtr())) {
-				return INVISIBLE_FLASH_COLOR;
-			}
-			break;
-		}
+//		switch (accObject.getAccRole()) {
+//		case MSAA.ROLE_SYSTEM_WINDOW:
+//			if (FlashMSAAUtil.isFlash(accObject.getPtr())) {
+//				return FLASH_COLOR;
+//			}
+//			break;
+//		case MSAA.ROLE_SYSTEM_CLIENT:
+//			if (FlashMSAAUtil.isInvisibleFlash(accObject.getPtr())) {
+//				return INVISIBLE_FLASH_COLOR;
+//			}
+//			break;
+//		}
 		return null;
 	}
 

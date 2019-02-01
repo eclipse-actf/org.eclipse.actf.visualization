@@ -12,6 +12,7 @@
 package org.eclipse.actf.accservice.swtbridge.internal.ia2;
 
 import org.eclipse.actf.util.win32.COMUtil;
+import org.eclipse.swt.internal.ole.win32.COM;
 import org.eclipse.swt.internal.ole.win32.GUID;
 import org.eclipse.swt.internal.ole.win32.IUnknown;
 
@@ -20,8 +21,8 @@ import org.eclipse.swt.internal.ole.win32.IUnknown;
 public class IAccessibleEditableText extends IUnknown {
     public static final GUID IID = COMUtil.IIDFromString("{A59AA09A-7011-4b65-939D-32B1FB5547E3}"); //$NON-NLS-1$
     
-    int address;
-    public IAccessibleEditableText(int address) {
+    long address;
+    public IAccessibleEditableText(long address) {
         super(address);
         this.address = address;
     }
@@ -32,8 +33,8 @@ public class IAccessibleEditableText extends IUnknown {
     public int deleteText(int startOffset, int endOffset) {
         return COMUtil.VtblCall(4, address, startOffset, endOffset);
     }
-    public int insertText(int offset, int pszText) {
-        return COMUtil.VtblCall(5, address, offset, pszText);
+    public int insertText(int offset, long pszText) {
+        return COM.VtblCall(5, address, offset, pszText);
     }
     public int cutText(int startOffset, int endOffset) {
         return COMUtil.VtblCall(6, address, startOffset, endOffset);
@@ -41,10 +42,10 @@ public class IAccessibleEditableText extends IUnknown {
     public int pasteText(int offset) {
         return COMUtil.VtblCall(7, address, offset);
     }
-    public int replaceText(int startOffset, int endOffset, int pszText) {
-        return COMUtil.VtblCall(8, address, startOffset, endOffset, pszText);
+    public int replaceText(int startOffset, int endOffset, long pszText) {
+        return COM.VtblCall(8, address, startOffset, endOffset, pszText);
     }
-    public int setAttributes(int startOffset, int endOffset, int pszAttributes) {
-        return COMUtil.VtblCall(9, address, startOffset, endOffset, pszAttributes);
+    public int setAttributes(int startOffset, int endOffset, long pszAttributes) {
+        return COM.VtblCall(9, address, startOffset, endOffset, pszAttributes);
     }
 }

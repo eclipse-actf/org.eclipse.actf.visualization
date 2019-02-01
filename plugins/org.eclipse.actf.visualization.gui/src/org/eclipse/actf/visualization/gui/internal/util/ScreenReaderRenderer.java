@@ -16,7 +16,6 @@ import org.eclipse.actf.accservice.swtbridge.IA2;
 import org.eclipse.actf.accservice.swtbridge.MSAA;
 import org.eclipse.actf.accservice.swtbridge.ia2.Accessible2;
 import org.eclipse.actf.accservice.swtbridge.ia2.IA2Util;
-import org.eclipse.actf.model.flash.util.FlashMSAAUtil;
 import org.eclipse.actf.visualization.gui.IGuiViewIDs;
 import org.eclipse.actf.visualization.gui.ui.views.IFlashDOMView;
 import org.eclipse.actf.visualization.gui.ui.views.MSAATreeContentProvider;
@@ -33,7 +32,7 @@ import com.ibm.icu.text.MessageFormat;
 
 public class ScreenReaderRenderer {
 	private static final String SPACE = " "; //$NON-NLS-1$
-	private int lastHwnd = 0;
+	private long lastHwnd = 0;
 	private String lastText = ""; //$NON-NLS-1$
 	private StyledText text;
 	private TextMap textMap;
@@ -144,39 +143,39 @@ public class ScreenReaderRenderer {
 					display.syncExec(new Runnable() {
 						public void run() {
 							if (!(cancel || text.isDisposed())) {
-								int hwnd = accObject.getWindow();
-								if (hwnd != lastHwnd) {
-									if (FlashMSAAUtil.isFlash(accObject
-											.getPtr())) {
-										String wmode = null;
-										if (0 == hwnd) {
-											wmode = FlashMSAAUtil
-													.getHtmlAttribute(accObject
-															.getPtr(), "WMode"); //$NON-NLS-1$
-										}
-										if (null == wmode) {
-											AccessibleObject parentObject = accObject
-													.getCachedParent();
-											if (null != parentObject
-													&& hwnd != parentObject
-															.getWindow()) {
-												appendText(
-														Messages.msaa_flash_start
-																+ "\n", SWT.COLOR_GRAY, SWT.COLOR_CYAN, false); //$NON-NLS-1$ 
-												sayFlashEnd[0] = true;
-											}
-										} else {
-											appendText(
-													Messages.msaa_flash_inaccessible
-															+ " wmode=" + wmode + "\n", SWT.COLOR_GRAY, SWT.COLOR_RED, false); //$NON-NLS-1$ //$NON-NLS-2$ 
-											if (null != flashDOMView) {
-												flashDOMView
-														.addWindowlessElement(accObject);
-											}
-										}
-									}
-									lastHwnd = hwnd;
-								}
+//								long hwnd = accObject.getWindow();
+//								if (hwnd != lastHwnd) {
+//									if (FlashMSAAUtil.isFlash(accObject
+//											.getPtr())) {
+//										String wmode = null;
+//										if (0 == hwnd) {
+//											wmode = FlashMSAAUtil
+//													.getHtmlAttribute(accObject
+//															.getPtr(), "WMode"); //$NON-NLS-1$
+//										}
+//										if (null == wmode) {
+//											AccessibleObject parentObject = accObject
+//													.getCachedParent();
+//											if (null != parentObject
+//													&& hwnd != parentObject
+//															.getWindow()) {
+//												appendText(
+//														Messages.msaa_flash_start
+//																+ "\n", SWT.COLOR_GRAY, SWT.COLOR_CYAN, false); //$NON-NLS-1$ 
+//												sayFlashEnd[0] = true;
+//											}
+//										} else {
+//											appendText(
+//													Messages.msaa_flash_inaccessible
+//															+ " wmode=" + wmode + "\n", SWT.COLOR_GRAY, SWT.COLOR_RED, false); //$NON-NLS-1$ //$NON-NLS-2$ 
+//											if (null != flashDOMView) {
+//												flashDOMView
+//														.addWindowlessElement(accObject);
+//											}
+//										}
+//									}
+//									lastHwnd = hwnd;
+//								}
 								renderItem(accObject, false, index);
 								renderChildren[0] = provider
 										.getChildren(accObject);
@@ -213,7 +212,7 @@ public class ScreenReaderRenderer {
 		String outText = null == accName ? "" : accName.replace('\u00A0', ' ').trim(); //$NON-NLS-1$
 		int accState = accObject.getAccState();
 		int accRole = accObject.getAccRole();
-		boolean isFlash = FlashMSAAUtil.isFlash(accObject.getPtr());
+		boolean isFlash = false;//FlashMSAAUtil.isFlash(accObject.getPtr());
 		// boolean isBrowser = WebBrowserUtil.isBrowser(accObject);
 		boolean isBrowser = isBrowserContent(accObject.getClassName());
 		String prefix = "", postfix = ""; //$NON-NLS-1$ //$NON-NLS-2$

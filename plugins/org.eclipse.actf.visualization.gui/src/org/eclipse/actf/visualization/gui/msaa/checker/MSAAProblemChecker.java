@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.actf.accservice.swtbridge.AccessibleObject;
 import org.eclipse.actf.accservice.swtbridge.IA2;
 import org.eclipse.actf.accservice.swtbridge.MSAA;
-import org.eclipse.actf.model.flash.util.FlashMSAAUtil;
 import org.eclipse.actf.visualization.gui.ui.views.MSAATreeContentProvider;
 
 public class MSAAProblemChecker implements MSAAProblemConst {
@@ -54,9 +53,9 @@ public class MSAAProblemChecker implements MSAAProblemConst {
 				int role = ao.getAccRole();
 				switch (role) {
 				case MSAA.ROLE_SYSTEM_WINDOW:
-					if (FlashMSAAUtil.isFlash(ao.getPtr())) {
-						isFlash = true;
-					}
+//					if (FlashMSAAUtil.isFlash(ao.getPtr())) {
+//						isFlash = true;
+//					}
 					break;
 				case MSAA.ROLE_SYSTEM_CELL:
 				case MSAA.ROLE_SYSTEM_STATICTEXT:
@@ -72,11 +71,11 @@ public class MSAAProblemChecker implements MSAAProblemConst {
 				case MSAA.ROLE_SYSTEM_OUTLINE: // Ignore
 					break;
 				case MSAA.ROLE_SYSTEM_CLIENT:
-					if (FlashMSAAUtil.isInvisibleFlash(ao.getPtr())) {
-						problems.add(new MSAAProblem(MSAA_ERROR,
-								MSAA_PROB_INVISIBLE_FLASH, ao));
-						isFlash = true;
-					}
+//					if (FlashMSAAUtil.isInvisibleFlash(ao.getPtr())) {
+//						problems.add(new MSAAProblem(MSAA_ERROR,
+//								MSAA_PROB_INVISIBLE_FLASH, ao));
+//						isFlash = true;
+//					}
 					break;
 				default: {
 					if (null == accName || 0 == accName.length()) {

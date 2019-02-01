@@ -6,6 +6,7 @@ Bundle-Version: 1.5.1.qualifier
 Bundle-Vendor: Eclipse ACTF Project
 Bundle-Localization: plugin
 Fragment-Host: org.eclipse.actf.visualization.blind;bundle-version="0.0.1"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.actf.model.ui.editors.ooo,
  org.eclipse.actf.model.ui.editors.ooo.initializer
+Automatic-Module-Name: org.eclipse.actf.visualization.blind.odfbyhtml

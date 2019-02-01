@@ -22,7 +22,7 @@ public class InternalAccessibleApplication implements AccessibleApplication {
 
     private IAccessibleApplication accessibleApplication = null;
     
-    public InternalAccessibleApplication(int address) {
+    public InternalAccessibleApplication(long address) {
         accessibleApplication = new IAccessibleApplication(address);
         accessibleApplication.AddRef();
     }

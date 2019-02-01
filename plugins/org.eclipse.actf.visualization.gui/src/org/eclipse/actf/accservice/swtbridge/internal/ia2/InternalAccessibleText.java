@@ -19,6 +19,7 @@ import org.eclipse.actf.util.win32.NativeStringAccess;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.internal.ole.win32.COM;
+import org.eclipse.swt.internal.win32.OS;
 import org.eclipse.swt.ole.win32.OLE;
 
 
@@ -28,7 +29,7 @@ public class InternalAccessibleText implements AccessibleText {
 
     private IAccessibleText accessibleText = null;
     
-    public InternalAccessibleText(int address) {
+    public InternalAccessibleText(long address) {
         accessibleText = new IAccessibleText(address);
         accessibleText.AddRef();
     }
@@ -305,8 +306,8 @@ public class InternalAccessibleText implements AccessibleText {
     }
     
     private static TextSegment getTextSegment(NativeIntAccess nia) {
-        int[] hMem = new int[3];
-        MemoryUtil.MoveMemory(hMem, nia.getAddress(), 4*hMem.length);
+        long[] hMem = new long[2];
+        OS.MoveMemory(hMem, nia.getAddress(), OS.PTR_SIZEOF * hMem.length);
         if (0 != hMem[0]) {
             try {
                 TextSegment textSegment = new TextSegment("",0,0); //$NON-NLS-1$
@@ -316,8 +317,8 @@ public class InternalAccessibleText implements AccessibleText {
                     MemoryUtil.MoveMemory(buffer, hMem[0], size);
                     textSegment.text = new String(buffer);
                 }
-                textSegment.start = hMem[1];
-                textSegment.end = hMem[2];
+                textSegment.start = (int)hMem[1];
+                textSegment.end = (int)(hMem[1] >> 32);
                 return textSegment;
             }
             finally {

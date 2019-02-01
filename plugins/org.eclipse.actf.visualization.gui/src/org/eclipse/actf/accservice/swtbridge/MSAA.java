@@ -192,10 +192,10 @@ public class MSAA {
         SELFLAG_ADDSELECTION    = 8,    // Adds the object to the current selection.
         SELFLAG_REMOVESELECTION = 16;   // Removes the object from the current selection.
 
-	public static int getAccessibleObjectFromPoint(Point point, int[] pChild) {
+	public static long getAccessibleObjectFromPoint(Point point, int[] pChild) {
         NativeVariantAccess nva = new NativeVariantAccess();
         try {
-            int pvObject = AccessibleObjectFromPoint(point.x,point.y,nva.getAddress());
+            long pvObject = AccessibleObjectFromPoint(point.x,point.y,nva.getAddress());
             if( OLE.VT_I4 == nva.getType() ) {
                 pChild[0] = nva.getInt();
             }
@@ -206,10 +206,10 @@ public class MSAA {
         }
 	}
 	
-	public static int getAccessibleObjectFromEvent(int hwnd, int dwId, int dwChildId, int[] pChild) {
+	public static long getAccessibleObjectFromEvent(long hwnd, int dwId, int dwChildId, int[] pChild) {
         NativeVariantAccess nva = new NativeVariantAccess();
         try {
-            int pvObject = AccessibleObjectFromEvent(hwnd, dwId, dwChildId, nva.getAddress());
+            long pvObject = AccessibleObjectFromEvent(hwnd, dwId, dwChildId, nva.getAddress());
             if( OLE.VT_I4 == nva.getType() ) {
                 pChild[0] = nva.getInt();
             }
@@ -220,7 +220,7 @@ public class MSAA {
         }
 	}
 
-	public static void getAccessibleChildren(int address, Variant[] pVarResult) {
+	public static void getAccessibleChildren(long address, Variant[] pVarResult) {
 		int resultLength = pVarResult.length;
         NativeVariantAccess nva = new NativeVariantAccess(resultLength);
         try {
@@ -243,7 +243,7 @@ public class MSAA {
         }
 	}
 	
-	public static int getWindowFromAccessibleObject(int address) {
+	public static long getWindowFromAccessibleObject(long address) {
 		return WindowFromAccessibleObject(address);
 	}
 
@@ -268,19 +268,19 @@ public class MSAA {
 	}
 
 	/** Accessibility natives */
-	public static final native int AccessibleObjectFromPoint(int x, int y, int pvarChild);
-	public static final native int AccessibleObjectFromWindow(int hwnd);
-	public static final native int AccessibleChildren(int paccContainer, int iChildStart, int cChildren, int rgvarChildren);
-	public static final native int WindowFromAccessibleObject(int pAcc);
+	public static final native long AccessibleObjectFromPoint(int x, int y, long pvarChild);
+	public static final native long AccessibleObjectFromWindow(long hwnd);
+	public static final native int AccessibleChildren(long paccContainer, int iChildStart, int cChildren, long rgvarChildren);
+	public static final native long WindowFromAccessibleObject(long pAcc);
 	public static final native int GetRoleText(int lRole, char[] lpszRole, int cchRoleMax);
 	public static final native int GetStateText(int lStateBit, char[] lpszState, int cchState);
 	
-	public static final native int AccessibleObjectFromEvent(int hwnd, int dwId, int dwChildId, int pvarChild);
-	public static final native int SetWinEventHook(int eventMin, int eventMax, int hmodWinEventProc, int lpfnWinEventProc, int idProcess,int idThread,int dwFlags);
-	public static final native int UnhookWinEvent(int hEvent);
+	public static final native long AccessibleObjectFromEvent(long hwnd, int dwId, int dwChildId, long pvarChild);
+	public static final native long SetWinEventHook(int eventMin, int eventMax, long hmodWinEventProc, long lpfnWinEventProc, int idProcess,int idThread,int dwFlags);
+	public static final native long UnhookWinEvent(long hEvent);
 
     /** */
-    public static final native int HTMLDocumentFromWindow(int hwnd);
+    public static final native long HTMLDocumentFromWindow(long hwnd);
 
     /** SPI Support **/
     private final static int SPI_GETSCREENREADER = 70;

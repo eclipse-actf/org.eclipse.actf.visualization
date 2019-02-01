@@ -35,12 +35,12 @@ public class MSAAViewRegistory implements IGuiViewIDs {
 	private static int updateRef = 0;
 
 	private static final Display display = Display.getCurrent();
-	private static int hwndRoot = 0;
+	private static long hwndRoot = 0;
 	private static IPartListener2 partListener = new IPartListener2() {
 		public void partActivated(IWorkbenchPartReference partRef) {
 			if (partRef instanceof IEditorReference) {
 				if (TargetWindow.isEmbeddedBrowser()) {
-					final int hwnd = TargetWindow.getRootWindow();
+					final long hwnd = TargetWindow.getRootWindow();
 					if (hwnd != hwndRoot) {
 						display
 								.timerExec(

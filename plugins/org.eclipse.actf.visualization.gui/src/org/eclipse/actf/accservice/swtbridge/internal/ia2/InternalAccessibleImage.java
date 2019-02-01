@@ -24,7 +24,7 @@ public class InternalAccessibleImage implements AccessibleImage {
 
     private IAccessibleImage accessibleImage = null;
     
-    public InternalAccessibleImage(int address) {
+    public InternalAccessibleImage(long address) {
         accessibleImage = new IAccessibleImage(address);
         accessibleImage.AddRef();
     }

@@ -29,7 +29,7 @@ public class InternalAccessibleTable implements AccessibleTable {
 
     private IAccessibleTable accessibleTable = null;
     
-    public InternalAccessibleTable(int address) {
+    public InternalAccessibleTable(long address) {
         accessibleTable = new IAccessibleTable(address);
         accessibleTable.AddRef();
     }
@@ -415,11 +415,11 @@ public class InternalAccessibleTable implements AccessibleTable {
                     nia.getAddress(3),
                     nia.getAddress(4)) ) {
                     return new RowColumnExtents(
-                            nia.getAddress(0),
-                            nia.getAddress(1),
-                            nia.getAddress(2),
-                            nia.getAddress(3),
-                            0!=nia.getAddress(4));
+                            nia.getInt(0),
+                            nia.getInt(1),
+                            nia.getInt(2),
+                            nia.getInt(3),
+                            0!=nia.getInt(4));
                 }
             }
             finally {
@@ -434,11 +434,11 @@ public class InternalAccessibleTable implements AccessibleTable {
             try {
                 if( OLE.S_OK == accessibleTable.get_modelChange(nia.getAddress()) ) {
                     return new AccessibleTableModelChange(
-                            nia.getAddress(0),
-                            nia.getAddress(1),
-                            nia.getAddress(2),
-                            nia.getAddress(3),
-                            nia.getAddress(4));
+                            nia.getInt(0),
+                            nia.getInt(1),
+                            nia.getInt(2),
+                            nia.getInt(3),
+                            nia.getInt(4));
                 }
             }
             finally {

@@ -88,7 +88,7 @@ public class Accessible1PropertySource extends AbstractPropertyInvokeSource impl
 		}	
 		String strValue = null;
 		if( PID_HANDLE.equals(id) ) {
-            strValue = "0x"+Integer.toHexString(accObject.getWindow()); //$NON-NLS-1$
+            strValue = "0x"+Long.toHexString(accObject.getWindow()); //$NON-NLS-1$
             String wndClass = accObject.getClassName();
             if (null!=wndClass && wndClass.length() > 0) {
                 strValue += " [" + wndClass + "]"; //$NON-NLS-1$ //$NON-NLS-2$

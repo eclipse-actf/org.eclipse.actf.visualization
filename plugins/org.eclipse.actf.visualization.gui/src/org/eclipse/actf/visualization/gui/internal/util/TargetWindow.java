@@ -40,7 +40,7 @@ public class TargetWindow {
         return isEmbeddedBrowser(currentElement);
     }
     
-    public static int getWindowHandle() {
+    public static long getWindowHandle() {
         update();
         return getWindowHandle(currentElement);
     }
@@ -50,7 +50,7 @@ public class TargetWindow {
         return getID(currentElement);
     }
     
-    public static int getRootWindow() {
+    public static long getRootWindow() {
         update();
         return getRootWindow(currentElement);
     }
@@ -68,7 +68,7 @@ public class TargetWindow {
         return null;
     }
 
-    private static int getWindowHandle(Object element) {
+    private static long getWindowHandle(Object element) {
         IModelService modelService = getModelService(element);
         if( null != modelService ) {
             Composite composite = modelService.getTargetComposite();
@@ -76,8 +76,8 @@ public class TargetWindow {
                 return composite.handle;
             }
             Object objHandle = modelService.getAttribute(IModelService.ATTR_WINDOWHANDLE);
-            if( objHandle instanceof Integer ) {
-                return ((Integer)objHandle).intValue();
+            if( objHandle instanceof Long ) {
+                return ((Long)objHandle).longValue();
             }
         }
         return 0;
@@ -115,10 +115,10 @@ public class TargetWindow {
         return null;
     }
 
-    public static int getRootWindow(Object element) {
-        int hwnd = getWindowHandle(element);
+    public static long getRootWindow(Object element) {
+        long hwnd = getWindowHandle(element);
         if( isBrowser(element) ) {
-            int hwndChild = findBrowserChildren(hwnd);
+            long hwndChild = findBrowserChildren(hwnd);
             if( 0 != hwndChild ) {
                 return hwndChild;
             }
@@ -126,16 +126,16 @@ public class TargetWindow {
         return hwnd;
     }
     
-    private static int findBrowserChildren(int hwnd) {
+    private static long findBrowserChildren(long hwnd) {
         if( 0 != hwnd ) {
             String className = WindowUtil.GetWindowClassName(hwnd);
             if( WebBrowserUtil.isBrowserClass(className) ) {
                 return hwnd;
             }
-            for( int hwndChild=WindowUtil.GetChildWindow (hwnd); 0!=hwndChild;
+            for( long hwndChild=WindowUtil.GetChildWindow (hwnd); 0!=hwndChild;
                      hwndChild=WindowUtil.GetNextWindow (hwndChild) ) 
             {
-                int hwndFound = findBrowserChildren(hwndChild);
+                long hwndFound = findBrowserChildren(hwndChild);
                 if( 0 != hwndFound ) {
                     return hwndFound;
                 }

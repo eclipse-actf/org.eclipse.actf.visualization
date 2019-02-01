@@ -26,7 +26,7 @@ public class GuiTargetWindowDataProvider extends TargetWindowDataProvider {
 
     public IModelService[] getModelService() {
         List<GuiTargetWindowData> dsList = new ArrayList<GuiTargetWindowData>(); 
-        int hwnd = WindowUtil.GetChildWindow (WindowUtil.GetDesktopWindow());
+        long hwnd = WindowUtil.GetChildWindow (WindowUtil.GetDesktopWindow());
         while (hwnd != 0) {
             if( WindowUtil.IsWindowVisible(hwnd) && 
                 !OverlayWindow.WINDOW_TEXT.equals(WindowUtil.GetWindowText(hwnd)) ) {

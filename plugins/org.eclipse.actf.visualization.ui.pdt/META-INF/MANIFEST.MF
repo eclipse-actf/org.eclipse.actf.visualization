@@ -4,7 +4,7 @@ Bundle-Name: ACTF Visualization extension for PDT
 Bundle-SymbolicName: org.eclipse.actf.visualization.ui.pdt;singleton:=true
 Bundle-Version: 1.5.1.qualifier
 Bundle-Vendor: Eclipse ACTF Project
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.actf.visualization
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.actf.visualization.internal.ui.pdt.PdtVisualizationPlugin
+Automatic-Module-Name: org.eclipse.actf.visualization.ui.pdt

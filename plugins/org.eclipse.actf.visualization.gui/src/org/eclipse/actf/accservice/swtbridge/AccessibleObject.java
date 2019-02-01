@@ -72,7 +72,7 @@ public interface AccessibleObject extends IAdaptable {
      * 
      * @return window handle
      */
-    public int getWindow();
+    public long getWindow();
 
     /**
      * Get accRole value
@@ -287,5 +287,5 @@ public interface AccessibleObject extends IAdaptable {
      */
     public String getRealRoleText();
     
-    public int getPtr();
+    public long getPtr();
 }

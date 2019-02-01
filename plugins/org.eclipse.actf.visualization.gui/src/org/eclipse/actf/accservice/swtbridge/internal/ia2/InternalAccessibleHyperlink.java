@@ -24,7 +24,7 @@ public class InternalAccessibleHyperlink implements AccessibleHyperlink {
 
     private IAccessibleHyperlink accessibleHyperlink = null;
     
-    public InternalAccessibleHyperlink(int address) {
+    public InternalAccessibleHyperlink(long address) {
         accessibleHyperlink = new IAccessibleHyperlink(address);
         accessibleHyperlink.AddRef();
     }

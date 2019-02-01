@@ -31,7 +31,7 @@ public class GuiTargetWindowData implements IModelService {
 
 	private static final String categoryBrowser = Messages.msaa_external_browsers; 
 	private static final String categoryWindow = Messages.msaa_external_windows; 
-	private int hwnd;
+	private long hwnd;
 	private boolean isBrowser;
 
 	private class DummyModelServiceHolder implements IModelServiceHolder {
@@ -79,7 +79,7 @@ public class GuiTargetWindowData implements IModelService {
 	 * @param hwnd Window handle of the target window
 	 * @param isBrowser set true if the target window is a Web browser
 	 */
-	public GuiTargetWindowData(int hwnd, boolean isBrowser) {
+	public GuiTargetWindowData(long hwnd, boolean isBrowser) {
 		this.hwnd = hwnd;
 		this.isBrowser = isBrowser;
 		this.holder = new DummyModelServiceHolder(this);
@@ -125,7 +125,7 @@ public class GuiTargetWindowData implements IModelService {
 	 * @see org.eclipse.actf.model.IModelService#getID()
 	 */
 	public String getID() {
-		return getCategory() + "/" + Integer.toString(hwnd); //$NON-NLS-1$
+		return getCategory() + "/" + Long.toString(hwnd); //$NON-NLS-1$
 	}
 
 	/*
@@ -135,7 +135,7 @@ public class GuiTargetWindowData implements IModelService {
 	 */
 	public Object getAttribute(String name) {
 		if (IModelService.ATTR_WINDOWHANDLE.equals(name)) {
-			return new Integer(hwnd);
+			return new Long(hwnd);
 		}
 		return null;
 	}

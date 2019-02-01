@@ -18,9 +18,9 @@ public interface IAccessibleObjectFactory {
 	
     public AccessibleObject getAccessibleObjectFromPoint(Point point);
 
-    public AccessibleObject getAccessibleObjectFromWindow(int hwnd);
+    public AccessibleObject getAccessibleObjectFromWindow(long hwnd);
 
-    public AccessibleObject getAccessibleObjectFromEvent(int hwnd, int dwId, int dwChildId);
+    public AccessibleObject getAccessibleObjectFromEvent(long hwnd, int dwId, int dwChildId);
 
     public IAccessibleEventMonitor getAccessibleEventMonitor();
 }

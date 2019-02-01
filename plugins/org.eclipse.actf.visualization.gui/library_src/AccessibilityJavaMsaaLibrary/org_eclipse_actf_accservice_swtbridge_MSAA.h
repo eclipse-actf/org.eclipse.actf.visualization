@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007 IBM Corporation and Others
+ * Copyright (c) 2007, 2019 IBM Corporation and Others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -180,16 +180,16 @@ extern "C" {
  * Method:    AccessibleObjectFromPoint
  * Signature: (III)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleObjectFromPoint
-  (JNIEnv *, jclass, jint, jint, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleObjectFromPoint
+  (JNIEnv *, jclass, jint, jint, jintLong);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
  * Method:    AccessibleObjectFromWindow
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleObjectFromWindow
-  (JNIEnv *, jclass, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleObjectFromWindow
+  (JNIEnv *, jclass, jintLong);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
@@ -197,15 +197,15 @@ JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_Accessibl
  * Signature: (IIII)I
  */
 JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleChildren
-  (JNIEnv *, jclass, jint, jint, jint, jint);
+  (JNIEnv *, jclass, jintLong, jint, jint, jintLong);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
  * Method:    WindowFromAccessibleObject
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_WindowFromAccessibleObject
-  (JNIEnv *, jclass, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_WindowFromAccessibleObject
+  (JNIEnv *, jclass, jintLong);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
@@ -228,32 +228,32 @@ JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_GetStateT
  * Method:    AccessibleObjectFromEvent
  * Signature: (IIII)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleObjectFromEvent
-  (JNIEnv *, jclass, jint, jint, jint, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_AccessibleObjectFromEvent
+  (JNIEnv *, jclass, jintLong, jint, jint, jintLong);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
  * Method:    SetWinEventHook
  * Signature: (IIIIIII)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_SetWinEventHook
-  (JNIEnv *, jclass, jint, jint, jint, jint, jint, jint, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_SetWinEventHook
+  (JNIEnv *, jclass, jint, jint, jintLong, jintLong, jint, jint, jint);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
  * Method:    UnhookWinEvent
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_UnhookWinEvent
-  (JNIEnv *, jclass, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_UnhookWinEvent
+  (JNIEnv *, jclass, jintLong);
 
 /*
  * Class:     org_eclipse_actf_accservice_swtbridge_MSAA
  * Method:    HTMLDocumentFromWindow
  * Signature: (I)I
  */
-JNIEXPORT jint JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_HTMLDocumentFromWindow
-  (JNIEnv *, jclass, jint);
+JNIEXPORT jintLong JNICALL Java_org_eclipse_actf_accservice_swtbridge_MSAA_HTMLDocumentFromWindow
+  (JNIEnv *, jclass, jintLong);
 
 #ifdef __cplusplus
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 IBM Corporation and Others
+ * Copyright (c) 2009, 2019 IBM Corporation and Others
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -46,11 +46,13 @@ public class ReportViewActivator implements IMediatorEventListener {
 			IWorkbenchPage page = PlatformUIUtil.getActivePage();
 			if (curResult != tmpResult && page != null) {
 				IViewPart view = page.findView(SummaryReportView.ID);
-				IViewPart[] views = page.getViewStack(view);
-				if (views != null && !(views[0] instanceof IACTFReportViewer)) {
-					page.activate(view);
-					if (event.getView() != null) {
-						page.activate(event.getView());
+				if (view != null) {
+					IViewPart[] views = page.getViewStack(view);
+					if (views != null && !(views[0] instanceof IACTFReportViewer)) {
+						page.activate(view);
+						if (event.getView() != null) {
+							page.activate(event.getView());
+						}
 					}
 				}
 			}

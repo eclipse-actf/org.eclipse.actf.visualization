@@ -25,7 +25,7 @@ public class InternalAccessibleRelation implements AccessibleRelation {
 
     private IAccessibleRelation accessibleRelation = null;
     
-    public InternalAccessibleRelation(int address) {
+    public InternalAccessibleRelation(long address) {
         accessibleRelation = new IAccessibleRelation(address);
         accessibleRelation.AddRef();
     }

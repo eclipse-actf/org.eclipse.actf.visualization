@@ -23,7 +23,7 @@ public class InternalAccessibleComponent implements AccessibleComponent {
 
     private IAccessibleComponent accessibleComponent = null;
     
-    public InternalAccessibleComponent(int address) {
+    public InternalAccessibleComponent(long address) {
         accessibleComponent = new IAccessibleComponent(address);
         accessibleComponent.AddRef();
     }

@@ -6,7 +6,7 @@
       provider-name="Eclipse ACTF Project"
       os="win32"
       ws="win32"
-      arch="x86">
+      arch="x86_64">
 
    <description>
       %description

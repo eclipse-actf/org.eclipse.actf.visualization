@@ -16,15 +16,9 @@ import java.util.List;
 import java.util.Vector;
 
 import org.eclipse.actf.accservice.swtbridge.AccessibleObject;
-import org.eclipse.actf.accservice.swtbridge.AccessibleObjectFactory;
 import org.eclipse.actf.accservice.swtbridge.MSAA;
-import org.eclipse.actf.model.flash.util.FlashMSAAUtil;
-import org.eclipse.actf.util.win32.FlashMSAAObject;
-import org.eclipse.actf.util.win32.FlashMSAAObjectFactory;
-import org.eclipse.actf.util.win32.VariantUtil;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.ole.win32.Variant;
 
 public class MSAATreeContentProvider implements ITreeContentProvider {
 
@@ -82,25 +76,25 @@ public class MSAATreeContentProvider implements ITreeContentProvider {
 		}
 		if (hideHtml) {
 			ArrayList<AccessibleObject> result = new ArrayList<AccessibleObject>();
-			for (Object i : elements) {
-				if (i instanceof AccessibleObject) {
-
-					FlashMSAAObject msaaObject = FlashMSAAObjectFactory
-							.getFlashMSAAObjectFromWindow(((AccessibleObject) i)
-									.getWindow());
-					FlashMSAAObject[] results = FlashMSAAUtil
-							.getFlashElements(msaaObject);
-					AccessibleObject[] flashElements = new AccessibleObject[results.length];
-					for (int j = 0; j < results.length; j++) {
-						Variant v = VariantUtil.createVariantFromIDispatchAddress(results[j].getPtr());
-						flashElements[j] = AccessibleObjectFactory.getAccessibleObjectFromVariant(v);
-					}
-
-					for (AccessibleObject j : flashElements) {
-						result.add(j);
-					}
-				}
-			}
+//			for (Object i : elements) {
+//				if (i instanceof AccessibleObject) {
+//
+//					FlashMSAAObject msaaObject = FlashMSAAObjectFactory
+//							.getFlashMSAAObjectFromWindow(((AccessibleObject) i)
+//									.getWindow());
+//					FlashMSAAObject[] results = FlashMSAAUtil
+//							.getFlashElements(msaaObject);
+//					AccessibleObject[] flashElements = new AccessibleObject[results.length];
+//					for (int j = 0; j < results.length; j++) {
+//						Variant v = VariantUtil.createVariantFromIDispatchAddress(results[j].getPtr());
+//						flashElements[j] = AccessibleObjectFactory.getAccessibleObjectFromVariant(v);
+//					}
+//
+//					for (AccessibleObject j : flashElements) {
+//						result.add(j);
+//					}
+//				}
+//			}
 			return result.toArray();
 		}
 		return elements;
@@ -136,6 +130,6 @@ public class MSAATreeContentProvider implements ITreeContentProvider {
 
 	public void setShowOffscreen(boolean showOffscreen) {
 		this.showOffscreen = showOffscreen;
-		FlashMSAAUtil.setShowOffscreen(showOffscreen);
+//		FlashMSAAUtil.setShowOffscreen(showOffscreen);
 	}
 }

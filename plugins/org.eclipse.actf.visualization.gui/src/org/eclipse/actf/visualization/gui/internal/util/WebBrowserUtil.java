@@ -20,7 +20,7 @@ public class WebBrowserUtil {
         "MozillaContentWindowClass"  //$NON-NLS-1$
     };
     
-    public static boolean isBrowserFrame(int hwndFrame) {
+    public static boolean isBrowserFrame(long hwndFrame) {
         String className = WindowUtil.GetWindowClassName(hwndFrame);
         if( "MozillaUIWindowClass".equals(className) ||  //$NON-NLS-1$
             "IEFrame".equals(className) ) { //$NON-NLS-1$

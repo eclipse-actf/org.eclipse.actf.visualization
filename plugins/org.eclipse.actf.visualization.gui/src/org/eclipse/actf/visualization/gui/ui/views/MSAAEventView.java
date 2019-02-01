@@ -336,7 +336,7 @@ public class MSAAEventView extends ViewPart implements IMSAAEventView,
 		}
 	}
 
-	private void showEventInfo(int event, int hwnd, int idObject, int idChild,
+	private void showEventInfo(int event, long hwnd, int idObject, int idChild,
 			AccessibleObject accObject) {
 		if (text.isDisposed() || text.isFocusControl()) {
 			return;
@@ -574,7 +574,7 @@ public class MSAAEventView extends ViewPart implements IMSAAEventView,
 		lastTime = currentTime;
 	}
 
-	public void handleEvent(final int event, final int hwnd,
+	public void handleEvent(final int event, final long hwnd,
 			final int idObject, final int idChild,
 			final AccessibleObject accObject) {
 		if (checkShowInfo(event, hwnd)) {
@@ -600,16 +600,16 @@ public class MSAAEventView extends ViewPart implements IMSAAEventView,
 		return enabledSet;
 	}
 
-	private boolean checkShowInfo(int event, int hwnd) {
+	private boolean checkShowInfo(int event, long hwnd) {
 		boolean showInfo = false;
 		if (0 == MSAAViewRegistory.getUpdateRef()
 				&& null != MSAAViewRegistory.rootObject) {
 			if (null != MSAA.getEventTypeText(event)) {
-				int hwndRoot = MSAAViewRegistory.rootObject.getWindow();
+				long hwndRoot = MSAAViewRegistory.rootObject.getWindow();
 				if (0 != hwndRoot) {
 					showInfo = MSAA.EVENT_OBJECT_FOCUS == event
 							&& WindowUtil.isPopupMenu(hwnd);
-					for (int hwndParent = hwnd; !(showInfo || 0 == hwndParent); hwndParent = WindowUtil
+					for (long hwndParent = hwnd; !(showInfo || 0 == hwndParent); hwndParent = WindowUtil
 							.GetParentWindow(hwndParent)) {
 						showInfo = (hwndRoot == hwndParent);
 					}

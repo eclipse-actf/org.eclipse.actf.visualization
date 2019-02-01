@@ -22,7 +22,7 @@ public class InternalAccessibleHypertext implements AccessibleHypertext {
 
     private IAccessibleHypertext accessibleHypertext = null;
     
-    public InternalAccessibleHypertext(int address) {
+    public InternalAccessibleHypertext(long address) {
         accessibleHypertext = new IAccessibleHypertext(address);
         accessibleHypertext.AddRef();
     }

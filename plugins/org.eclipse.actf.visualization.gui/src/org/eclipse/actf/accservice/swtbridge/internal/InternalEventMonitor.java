@@ -22,7 +22,7 @@ import org.eclipse.swt.internal.Callback;
 public class InternalEventMonitor implements IAccessibleEventMonitor {
 
 	private Callback callback = null;
-	private int hWinEventHook = 0;
+	private long hWinEventHook = 0;
 	private IAccessibleEventListener listener = null;
 	private Set<Integer> filter;
 	
@@ -34,7 +34,7 @@ public class InternalEventMonitor implements IAccessibleEventMonitor {
 		this.listener = listener;
 		this.filter = filter;
 		callback = new Callback(this,"WinEventProc",7); //$NON-NLS-1$
-		int address = callback.getAddress();
+		long address = callback.getAddress();
 		if (address == 0) SWT.error(SWT.ERROR_NO_MORE_CALLBACKS);
 		hWinEventHook = MSAA.SetWinEventHook(0x00000001, 0x7FFFFFFF, 0, address, 0, 0,0);
 	}
@@ -53,7 +53,7 @@ public class InternalEventMonitor implements IAccessibleEventMonitor {
 		}
 	}
 	
-	int WinEventProc(int hEvent, int event, int hwnd, int idObject, int idChild, int idThread, int dwEventTime) {
+	long WinEventProc(long hEvent, long event, long hwnd, long idObject, long idChild, long idThread, long dwEventTime) {
 //		System.out.println(	"hEvent=0x"+Integer.toHexString(hEvent)		+",  "+
 //		"event=0x"+Integer.toHexString(event)		+",  "+
 //		"hwnd=0x"+Integer.toHexString(hwnd)			+",  "+		
@@ -61,8 +61,8 @@ public class InternalEventMonitor implements IAccessibleEventMonitor {
 //		"idChild=0x"+Integer.toHexString(idChild)	+",  "+		
 //		"idThread=0x"+Integer.toHexString(idThread)	+",  "+		
 //		"dwEventTime=0x"+Integer.toHexString(dwEventTime) );
-		if( null != listener && checkFilter(event) ) {
-			listener.handleEvent(event, hwnd, idObject, idChild, null);
+		if( null != listener && checkFilter((int)event) ) {
+			listener.handleEvent((int)event, hwnd, (int)idObject, (int)idChild, null);
 		}
 		return 0;
 	}

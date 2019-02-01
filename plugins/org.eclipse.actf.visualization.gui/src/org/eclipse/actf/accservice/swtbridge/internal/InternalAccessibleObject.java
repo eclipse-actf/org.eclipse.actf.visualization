@@ -89,11 +89,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 
 	private int accRole;
 	private int ia1Role, ia2Role;
-	private int accWindow;
+	private long accWindow;
 	private String strClassName;
 	private static final String STR_NULL = null;// "";
 
-	private InternalAccessibleObject(int address) {
+	private InternalAccessibleObject(long address) {
 		this((InternalAccessibleObject) null, new Variant(
 				new IDispatch(address)));
 	}
@@ -109,8 +109,8 @@ public class InternalAccessibleObject implements AccessibleObject {
 				break;
 			}
 		case OLE.VT_DISPATCH:
-			int[] ppvObject = new int[1];
-			int[] ppvServiceProvider = new int[1];
+			long[] ppvObject = new long[1];
+			long[] ppvServiceProvider = new long[1];
 			if (OLE.S_OK == varChild.getDispatch().QueryInterface(
 					IServiceProvider.IID, ppvServiceProvider)) {
 				IServiceProvider sp = new IServiceProvider(
@@ -202,8 +202,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 		disposeChildren();
 		NativeVariantAccess nva = new NativeVariantAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accRole(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nva.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accRole(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nva.getAddress())) {
+//				accRole = nva.getInt();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accRole(varChildIndex, nva.getAddress())) {
 				accRole = nva.getInt();
 			}
 		} finally {
@@ -297,31 +300,31 @@ public class InternalAccessibleObject implements AccessibleObject {
 
 	public static AccessibleObject getAccessibleObjectFromPoint(Point point) {
 		int[] pChild = new int[1];
-		int address = MSAA.getAccessibleObjectFromPoint(point, pChild);
+		long address = MSAA.getAccessibleObjectFromPoint(point, pChild);
 		return newInstance(address, pChild[0]);
 	}
 
-	public static AccessibleObject getAccessibleObjectFromWindow(int hwnd) {
-		int address = MSAA.AccessibleObjectFromWindow(hwnd);
+	public static AccessibleObject getAccessibleObjectFromWindow(long hwnd) {
+		long address = MSAA.AccessibleObjectFromWindow(hwnd);
 		return newInstance(address);
 	}
 
-	public static AccessibleObject getAccessibleObjectFromEvent(int hwnd,
+	public static AccessibleObject getAccessibleObjectFromEvent(long hwnd,
 			int dwId, int dwChildId) {
 		int[] pChild = new int[1];
-		int address = MSAA.getAccessibleObjectFromEvent(hwnd, dwId, dwChildId,
+		long address = MSAA.getAccessibleObjectFromEvent(hwnd, dwId, dwChildId,
 				pChild);
 		return newInstance(address, pChild[0]);
 	}
 
-	public static AccessibleObject newInstance(int address) {
+	public static AccessibleObject newInstance(long address) {
 		if (0 == address) {
 			return null;
 		}
 		return new InternalAccessibleObject(address);
 	}
 
-	private static AccessibleObject newInstance(int address, int childId) {
+	private static AccessibleObject newInstance(long address, int childId) {
 		AccessibleObject accObject = newInstance(address);
 		if ((null != accObject) && (MSAA.CHILDID_SELF != childId)) {
 			return ((InternalAccessibleObject) accObject)
@@ -426,7 +429,7 @@ public class InternalAccessibleObject implements AccessibleObject {
 	 * 
 	 * @see org.eclipse.actf.accservice.swtbridge.AccessibleObject#getWindow()
 	 */
-	public int getWindow() {
+	public long getWindow() {
 		if (-1 == accWindow) {
 			try {
 				accWindow = MSAA.WindowFromAccessibleObject(getIAccessible()
@@ -456,8 +459,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 		if (-1 == accRole) {
 			NativeVariantAccess nva = new NativeVariantAccess();
 			try {
-				if (OLE.S_OK == getIAccessible().get_accRole(OLE.VT_I4, 0,
-						varChildIndex.getInt(), 0, nva.getAddress())) {
+//				if (OLE.S_OK == getIAccessible().get_accRole(OLE.VT_I4, 0,
+//						varChildIndex.getInt(), 0, nva.getAddress())) {
+//					return nva.getString();
+//				}
+				if (OLE.S_OK == getIAccessible().get_accRole(varChildIndex, nva.getAddress())) {
 					return nva.getString();
 				}
 			} finally {
@@ -476,7 +482,7 @@ public class InternalAccessibleObject implements AccessibleObject {
 	 */
 	public String getClassName() {
 		if (null == strClassName) {
-			int hwnd = this.getWindow();
+			long hwnd = this.getWindow();
 			strClassName = STR_NULL;
 			if (0 != hwnd) {
 				strClassName = WindowUtil.GetWindowClassName(hwnd);
@@ -493,8 +499,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public int getAccState() {
 		NativeVariantAccess nva = new NativeVariantAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accState(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nva.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accState(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nva.getAddress())) {
+//				return nva.getInt();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accState(varChildIndex, nva.getAddress())) {
 				return nva.getInt();
 			}
 		} catch (Exception e) {
@@ -512,8 +521,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public String getAccName() {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accName(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accName(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//				return nsa.getString();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accName(varChildIndex, nsa.getAddress())) {
 				return nsa.getString();
 			}
 		} catch (Exception e) {
@@ -531,8 +543,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public String getAccValue() {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accValue(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accValue(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//				return nsa.getString();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accValue(varChildIndex, nsa.getAddress())) {
 				return nsa.getString();
 			}
 		} catch (Exception e) {
@@ -550,8 +565,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public String getAccDescription() {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accDescription(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accDescription(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//				return nsa.getString();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accDescription(varChildIndex, nsa.getAddress())) {
 				return nsa.getString();
 			}
 		} catch (Exception e) {
@@ -569,8 +587,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public String getAccHelp() {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accHelp(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accHelp(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//				return nsa.getString();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accHelp(varChildIndex, nsa.getAddress())) {
 				return nsa.getString();
 			}
 		} catch (Exception e) {
@@ -588,8 +609,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public String getAccKeyboardShortcut() {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accKeyboardShortcut(OLE.VT_I4,
-					0, varChildIndex.getInt(), 0, nsa.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accKeyboardShortcut(OLE.VT_I4,
+//					0, varChildIndex.getInt(), 0, nsa.getAddress())) {
+//				return nsa.getString();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accKeyboardShortcut(varChildIndex, nsa.getAddress())) {
 				return nsa.getString();
 			}
 		} catch (Exception e) {
@@ -607,8 +631,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	public String getAccDefaultAction() {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accDefaultAction(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accDefaultAction(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress())) {
+//				return nsa.getString();
+//			}
+			if (OLE.S_OK == getIAccessible().get_accDefaultAction(varChildIndex, nsa.getAddress())) {
 				return nsa.getString();
 			}
 		} catch (Exception e) {
@@ -628,8 +655,13 @@ public class InternalAccessibleObject implements AccessibleObject {
 		NativeStringAccess nsa = new NativeStringAccess();
 		NativeIntAccess nia = new NativeIntAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accHelpTopic(nsa.getAddress(),
-					OLE.VT_I4, 0, varChildIndex.getInt(), 0, nia.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accHelpTopic(nsa.getAddress(),
+//					OLE.VT_I4, 0, varChildIndex.getInt(), 0, nia.getAddress())) {
+//				pTopicIndex[0] = nia.getInt();
+//				pHelpFile[0] = nsa.getString();
+//				return true;
+//			}
+			if (OLE.S_OK == getIAccessible().get_accHelpTopic(nsa.getAddress(), varChildIndex, nia.getAddress())) {
 				pTopicIndex[0] = nia.getInt();
 				pHelpFile[0] = nsa.getString();
 				return true;
@@ -652,9 +684,15 @@ public class InternalAccessibleObject implements AccessibleObject {
 			return null;
 		NativeIntAccess nia = new NativeIntAccess(4);
 		try {
+//			if (OLE.S_OK == getIAccessible().accLocation(nia.getAddress(0),
+//					nia.getAddress(1), nia.getAddress(2), nia.getAddress(3),
+//					OLE.VT_I4, 0, varChildIndex.getInt(), 0)) {
+//				return new Rectangle(nia.getInt(0), nia.getInt(1), nia
+//						.getInt(2), nia.getInt(3));
+//			}
 			if (OLE.S_OK == getIAccessible().accLocation(nia.getAddress(0),
 					nia.getAddress(1), nia.getAddress(2), nia.getAddress(3),
-					OLE.VT_I4, 0, varChildIndex.getInt(), 0)) {
+					varChildIndex)) {
 				return new Rectangle(nia.getInt(0), nia.getInt(1), nia
 						.getInt(2), nia.getInt(3));
 			}
@@ -666,21 +704,24 @@ public class InternalAccessibleObject implements AccessibleObject {
 	}
 
 	public boolean doDefaultAction() {
-		return OLE.S_OK == getIAccessible().accDoDefaultAction(OLE.VT_I4, 0,
-				varChildIndex.getInt(), 0);
+//		return OLE.S_OK == getIAccessible().accDoDefaultAction(OLE.VT_I4, 0,
+//				varChildIndex.getInt(), 0);
+		return OLE.S_OK == getIAccessible().accDoDefaultAction(varChildIndex);
 	}
 
 	public boolean select(int flagsSelect) {
-		return OLE.S_OK == getIAccessible().accSelect(flagsSelect, OLE.VT_I4,
-				0, varChildIndex.getInt(), 0);
+//		return OLE.S_OK == getIAccessible().accSelect(flagsSelect, OLE.VT_I4,
+//				0, varChildIndex.getInt(), 0);
+		return OLE.S_OK == getIAccessible().accSelect(flagsSelect, varChildIndex);
 	}
 
 	public boolean setAccName(String strName) {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
 			nsa.setString(strName);
-			return OLE.S_OK == getIAccessible().put_accName(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress());
+//			return OLE.S_OK == getIAccessible().put_accName(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress());
+			return OLE.S_OK == getIAccessible().put_accName(varChildIndex, nsa.getAddress());
 		} finally {
 			nsa.dispose();
 		}
@@ -690,8 +731,9 @@ public class InternalAccessibleObject implements AccessibleObject {
 		NativeStringAccess nsa = new NativeStringAccess();
 		try {
 			nsa.setString(strValue);
-			return OLE.S_OK == getIAccessible().put_accValue(OLE.VT_I4, 0,
-					varChildIndex.getInt(), 0, nsa.getAddress());
+//			return OLE.S_OK == getIAccessible().put_accValue(OLE.VT_I4, 0,
+//					varChildIndex.getInt(), 0, nsa.getAddress());
+			return OLE.S_OK == getIAccessible().put_accValue(varChildIndex, nsa.getAddress());
 		} finally {
 			nsa.dispose();
 		}
@@ -721,8 +763,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 	private Variant getAccChild(Variant varChild) {
 		NativeIntAccess nia = new NativeIntAccess();
 		try {
-			if (OLE.S_OK == getIAccessible().get_accChild(OLE.VT_I4, 0,
-					varChild.getInt(), 0, nia.getAddress())) {
+//			if (OLE.S_OK == getIAccessible().get_accChild(OLE.VT_I4, 0,
+//					varChild.getInt(), 0, nia.getAddress())) {
+//				return new Variant(new IDispatch(nia.getInt()));
+//			}
+			if (OLE.S_OK == getIAccessible().get_accChild(varChild, nia.getAddress())) {
 				return new Variant(new IDispatch(nia.getInt()));
 			}
 		} catch (Exception e) {
@@ -914,8 +959,11 @@ public class InternalAccessibleObject implements AccessibleObject {
 		if (-1 == ia1Role) {
 			NativeVariantAccess nva = new NativeVariantAccess();
 			try {
-				if (OLE.S_OK == getIAccessible().get_accRole(OLE.VT_I4, 0,
-						varChildIndex.getInt(), 0, nva.getAddress())) {
+//				if (OLE.S_OK == getIAccessible().get_accRole(OLE.VT_I4, 0,
+//						varChildIndex.getInt(), 0, nva.getAddress())) {
+//					return nva.getString();
+//				}
+				if (OLE.S_OK == getIAccessible().get_accRole(varChildIndex, nva.getAddress())) {
 					return nva.getString();
 				}
 			} finally {
@@ -937,7 +985,7 @@ public class InternalAccessibleObject implements AccessibleObject {
 		return Platform.getAdapterManager().getAdapter(this, adapter);
 	}
 
-	public int getPtr() {
+	public long getPtr() {
 		return getIAccessible().getAddress();
 	}
 }

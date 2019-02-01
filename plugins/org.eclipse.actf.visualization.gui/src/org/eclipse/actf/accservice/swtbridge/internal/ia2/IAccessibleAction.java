@@ -12,6 +12,7 @@
 package org.eclipse.actf.accservice.swtbridge.internal.ia2;
 
 import org.eclipse.actf.util.win32.COMUtil;
+import org.eclipse.swt.internal.ole.win32.COM;
 import org.eclipse.swt.internal.ole.win32.GUID;
 import org.eclipse.swt.internal.ole.win32.IUnknown;
 
@@ -20,28 +21,28 @@ import org.eclipse.swt.internal.ole.win32.IUnknown;
 public class IAccessibleAction extends IUnknown {
     public static final GUID IID = COMUtil.IIDFromString("{B70D9F59-3B5A-4dba-AB9E-22012F607DF5}"); //$NON-NLS-1$
     
-    int address;
-    public IAccessibleAction(int address) {
+    long address;
+    public IAccessibleAction(long address) {
         super(address);
         this.address = address;
     }
 
-    public int nActions(int pnActions) {
-        return COMUtil.VtblCall(3, address, pnActions); 
+    public int nActions(long pnActions) {
+        return COM.VtblCall(3, address, pnActions); 
     }
     public int doAction(int actionIndex) {
         return COMUtil.VtblCall(4, address, actionIndex); 
     }
-    public int get_description(int actionIndex, int pszDescription) {
-        return COMUtil.VtblCall(5, address, actionIndex, pszDescription); 
+    public int get_description(int actionIndex, long pszDescription) {
+        return COM.VtblCall(5, address, actionIndex, pszDescription); 
     }
-    public int get_keyBinding(int actionIndex, int nMaxBinding, int ppszKeyBinding, int pnBinding) {
+    public int get_keyBinding(int actionIndex, int nMaxBinding, long ppszKeyBinding, long pnBinding) {
         return COMUtil.VtblCall(6, address, actionIndex, nMaxBinding, ppszKeyBinding, pnBinding); 
     }
-    public int get_name(int actionIndex, int pszName) {
-        return COMUtil.VtblCall(7, address, actionIndex, pszName); 
+    public int get_name(int actionIndex, long pszName) {
+        return COM.VtblCall(7, address, actionIndex, pszName); 
     }
-    public int get_localizedName(int actionIndex, int pszLocalizedName) {
-        return COMUtil.VtblCall(8, address, actionIndex, pszLocalizedName); 
+    public int get_localizedName(int actionIndex, long pszLocalizedName) {
+        return COM.VtblCall(8, address, actionIndex, pszLocalizedName); 
     }
 }

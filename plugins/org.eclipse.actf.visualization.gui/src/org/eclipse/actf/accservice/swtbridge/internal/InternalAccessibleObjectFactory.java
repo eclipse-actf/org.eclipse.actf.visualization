@@ -32,7 +32,7 @@ public class InternalAccessibleObjectFactory implements IAccessibleObjectFactory
         return monitor;
     }
 
-    public AccessibleObject getAccessibleObjectFromEvent(int hwnd, int dwId, int dwChildId) {
+    public AccessibleObject getAccessibleObjectFromEvent(long hwnd, int dwId, int dwChildId) {
         return InternalAccessibleObject.getAccessibleObjectFromEvent(hwnd, dwId, dwChildId);
     }
 
@@ -40,7 +40,7 @@ public class InternalAccessibleObjectFactory implements IAccessibleObjectFactory
         return InternalAccessibleObject.getAccessibleObjectFromPoint(point);
     }
 
-    public AccessibleObject getAccessibleObjectFromWindow(int hwnd) {
+    public AccessibleObject getAccessibleObjectFromWindow(long hwnd) {
         return InternalAccessibleObject.getAccessibleObjectFromWindow(hwnd);
     }
 

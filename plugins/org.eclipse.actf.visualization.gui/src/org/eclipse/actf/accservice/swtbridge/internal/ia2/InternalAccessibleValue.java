@@ -23,7 +23,7 @@ public class InternalAccessibleValue implements AccessibleValue {
 
     private IAccessibleValue accessibleValue = null;
     
-    public InternalAccessibleValue(int address) {
+    public InternalAccessibleValue(long address) {
         accessibleValue = new IAccessibleValue(address);
         accessibleValue.AddRef();
     }

@@ -23,17 +23,17 @@ import org.eclipse.swt.internal.ole.win32.IUnknown;
 public class IServiceProvider extends IUnknown {
     public static final GUID IID = COMUtil.IIDFromString("{6d5140c1-7436-11ce-8034-00aa006009fa}"); //$NON-NLS-1$
 
-    public IServiceProvider(int address) {
+    public IServiceProvider(long address) {
         super(address);
     }
 
-    public int QueryService(int pGuidService, int pRiid, int ppvObject[]) {
+    public int QueryService(long pGuidService, long pRiid, long ppvObject[]) {
         return COM.VtblCall(3, getAddress(), pGuidService, pRiid, ppvObject);
     }
     
-    public int QueryService(GUID guidService, GUID riid, int ppvObject[]) {
-        int pGuidService = MemoryUtil.GlobalAlloc(GUID.sizeof);
-        int pRiid = MemoryUtil.GlobalAlloc(GUID.sizeof);
+    public int QueryService(GUID guidService, GUID riid, long ppvObject[]) {
+        long pGuidService = MemoryUtil.GlobalAlloc(GUID.sizeof);
+        long pRiid = MemoryUtil.GlobalAlloc(GUID.sizeof);
         try {
             COM.MoveMemory(pGuidService, guidService, GUID.sizeof);
             COM.MoveMemory(pRiid, riid, GUID.sizeof);

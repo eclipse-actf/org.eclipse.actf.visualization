@@ -11,5 +11,5 @@ Export-Package: org.eclipse.actf.visualization,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.actf.mediator;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Automatic-Module-Name: org.eclipse.actf.visualization
